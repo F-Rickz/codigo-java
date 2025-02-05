@@ -1,0 +1,29 @@
+package calculosueldo;
+
+import datosempleados.Empleado;
+
+public class CalculoSueldo {
+    protected double bono;
+    protected double ventas;
+    protected double horasTrabajadas;
+    protected double valorHora;
+
+    public CalculoSueldo(double bono, double ventas, double horasTrabajadas, double valorHora) {
+        this.bono = bono;
+        this.ventas = ventas;
+        this.horasTrabajadas = horasTrabajadas;
+        this.valorHora = valorHora;
+    }
+
+    public double calcularSueldoGerente(double sueldoBase) {
+        return sueldoBase + bono;
+    }
+
+    public double calcularSueldoVendedor(double sueldoBase) {
+        return sueldoBase + (ventas * 0.10);
+    }
+
+    public double calcularSueldoObrero() {
+        return horasTrabajadas * valorHora;
+    }
+}
