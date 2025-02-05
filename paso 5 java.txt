@@ -1,0 +1,93 @@
+package sistema;
+
+import datosempleados.Empleado;
+import calculosueldo.CalculoSueldo;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class SistemaNomina {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        Date fecha = new Date();
+
+        // Solicitar datos de los empleados
+        System.out.println("Ingrese la cantidad de obreros de limpieza:");
+        int numObreros = scanner.nextInt();
+        scanner.nextLine(); // Limpiar buffer
+
+        System.out.println("Ingrese la cantidad de vendedores:");
+        int numVendedores = scanner.nextInt();
+        scanner.nextLine(); // Limpiar buffer
+
+        // Agregar datos de obreros
+        for (int i = 0; i < numObreros; i++) {
+            System.out.println("Ingrese nombre del obrero " + (i + 1) + ":");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingrese cédula del obrero " + (i + 1) + ":");
+            String cedula = scanner.nextLine();
+            System.out.println("Ingrese horas trabajadas del obrero " + (i + 1) + ":");
+            double horasTrabajadas = scanner.nextDouble();
+            System.out.println("Ingrese valor por hora del obrero " + (i + 1) + ":");
+            double valorHora = scanner.nextDouble();
+            scanner.nextLine(); // Limpiar buffer
+
+            Empleado obrero = new Empleado();
+            obrero.setNombre(nombre);
+            obrero.setCedula(cedula);
+            obrero.setCargo("Obrero de limpieza");
+            obrero.setSueldoBase(horasTrabajadas * valorHora);
+            empleados.add(obrero);
+        }
+
+        // Agregar datos de vendedores
+        for (int i = 0; i < numVendedores; i++) {
+            System.out.println("Ingrese nombre del vendedor " + (i + 1) + ":");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingrese cédula del vendedor " + (i + 1) + ":");
+            String cedula = scanner.nextLine();
+            System.out.println("Ingrese sueldo base del vendedor " + (i + 1) + ":");
+            double sueldoBase = scanner.nextDouble();
+            System.out.println("Ingrese ventas del vendedor " + (i + 1) + ":");
+            double ventas = scanner.nextDouble();
+            scanner.nextLine(); // Limpiar buffer
+
+            Empleado vendedor = new Empleado();
+            vendedor.setNombre(nombre);
+            vendedor.setCedula(cedula);
+            vendedor.setCargo("Vendedor");
+            vendedor.setSueldoBase(sueldoBase + (ventas * 0.10));
+            empleados.add(vendedor);
+        }
+
+        // Agregar datos del gerente
+        System.out.println("Ingrese nombre del gerente:");
+        String nombreGerente = scanner.nextLine();
+        System.out.println("Ingrese cédula del gerente:");
+        String cedulaGerente = scanner.nextLine();
+        System.out.println("Ingrese sueldo base del gerente:");
+        double sueldoBaseGerente = scanner.nextDouble();
+        System.out.println("Ingrese bono del gerente:");
+        double bono = scanner.nextDouble();
+        scanner.nextLine(); // Limpiar buffer
+
+        Empleado gerente = new Empleado();
+        gerente.setNombre(nombreGerente);
+        gerente.setCedula(cedulaGerente);
+        gerente.setCargo("Gerente general");
+        gerente.setSueldoBase(sueldoBaseGerente + bono);
+        empleados.add(gerente);
+
+        // Mostrar recibos de nómina
+        System.out.println("\nRecibos de Nómina - Fecha: " + fecha);
+        for (Empleado empleado : empleados) {
+            System.out.println("\n--------------------------------------");
+            System.out.println("Nombre: " + empleado.getNombre());
+            System.out.println("Cédula: " + empleado.getCedula());
+            System.out.println("Cargo: " + empleado.getCargo());
+            System.out.println("Sueldo: " + empleado.getSueldoBase());
+        }
+    }
+}
